@@ -78,8 +78,12 @@ public class ParticleSystem {
         public void run() {
             if(mPs.get() != null) {
                 ParticleSystem ps = mPs.get();
-                ps.onUpdate(ps.mCurrentTime);
-                ps.mCurrentTime += TIMER_TASK_INTERVAL;
+                try {
+					ps.onUpdate(ps.mCurrentTime);
+					ps.mCurrentTime += TIMER_TASK_INTERVAL;
+				} catch (NullPointerException ex) {
+                	// Ignored
+				}
             }
         }
     }
